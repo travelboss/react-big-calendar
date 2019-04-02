@@ -13,6 +13,7 @@ class EventCell extends React.Component {
       isAllDay,
       onSelect,
       onDoubleClick,
+      onHover,
       localizer,
       continuesPrior,
       continuesAfter,
@@ -63,6 +64,10 @@ class EventCell extends React.Component {
           })}
           onClick={e => onSelect && onSelect(event, e)}
           onDoubleClick={e => onDoubleClick && onDoubleClick(event, e)}
+          onMouseEnter={e => onHover && onHover(event, e)}
+          onFocus={e => onHover && onHover(event, e)}
+          onMouseLeave={e => onHover && onHover(null, e)}
+          onBlur={e => onHover && onHover(null, e)}
         >
           {typeof children === 'function' ? children(content) : content}
         </div>
@@ -88,6 +93,7 @@ EventCell.propTypes = {
 
   onSelect: PropTypes.func,
   onDoubleClick: PropTypes.func,
+  onHover: PropTypes.func,
 }
 
 export default EventCell

@@ -16,6 +16,8 @@ function TimeGridEvent(props) {
     getters,
     onClick,
     onDoubleClick,
+    onHoverStart,
+    onHoverEnd,
     components: { event: Event, eventWrapper: EventWrapper },
   } = props
   let title = accessors.title(event)
@@ -40,6 +42,10 @@ function TimeGridEvent(props) {
       <div
         onClick={onClick}
         onDoubleClick={onDoubleClick}
+        onMouseEnter={onHoverStart}
+        onFocus={onHoverStart}
+        onMouseLeave={onHoverEnd}
+        onBlur={onHoverEnd}
         style={{
           ...userProps.style,
           top: `${top}%`,

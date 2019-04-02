@@ -38,6 +38,7 @@ class Popup extends React.Component {
       components,
       onSelect,
       onDoubleClick,
+      onHover,
       slotStart,
       slotEnd,
       localizer,
@@ -68,6 +69,7 @@ class Popup extends React.Component {
             accessors={accessors}
             components={components}
             onDoubleClick={onDoubleClick}
+            onHover={onHover}
             continuesPrior={dates.lt(accessors.end(event), slotStart, 'day')}
             continuesAfter={dates.gte(accessors.start(event), slotEnd, 'day')}
             selected={isSelected(event, selected)}
@@ -96,6 +98,7 @@ Popup.propTypes = {
   localizer: PropTypes.object.isRequired,
   onSelect: PropTypes.func,
   onDoubleClick: PropTypes.func,
+  onHover: PropTypes.func,
   slotStart: PropTypes.instanceOf(Date),
   slotEnd: PropTypes.number,
 }

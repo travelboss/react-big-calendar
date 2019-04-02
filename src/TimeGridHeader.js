@@ -96,6 +96,7 @@ class TimeGridHeader extends React.Component {
         localizer={localizer}
         onSelect={this.props.onSelectEvent}
         onDoubleClick={this.props.onDoubleClickEvent}
+        onHover={this.props.onHoverEvent}
         onSelectSlot={this.props.onSelectSlot}
         longPressThreshold={this.props.longPressThreshold}
       />
@@ -180,6 +181,7 @@ class TimeGridHeader extends React.Component {
               localizer={localizer}
               onSelect={this.props.onSelectEvent}
               onDoubleClick={this.props.onDoubleClickEvent}
+              onHover={this.props.onHoverEvent}
               onSelectSlot={this.props.onSelectSlot}
               longPressThreshold={this.props.longPressThreshold}
             />
@@ -212,6 +214,7 @@ TimeGridHeader.propTypes = {
   onSelectSlot: PropTypes.func,
   onSelectEvent: PropTypes.func,
   onDoubleClickEvent: PropTypes.func,
+  onHoverEvent: PropTypes.func,
   onDrillDown: PropTypes.func,
   getDrilldownView: PropTypes.func.isRequired,
   scrollRef: PropTypes.any,

@@ -313,6 +313,16 @@ class Calendar extends React.Component {
     onDoubleClickEvent: PropTypes.func,
 
     /**
+     * Callback fired when a calendar event is moused over or gains focus.
+     * When hover ends, function called with null `event`.
+     *
+     * ```js
+     * (event: Object, e: SyntheticEvent) => void
+     * ```
+     */
+    onHoverEvent: PropTypes.func,
+
+    /**
      * Callback fired when dragging a selection in the Time views.
      *
      * Returning `false` from the handler will prevent a selection.
@@ -913,6 +923,7 @@ class Calendar extends React.Component {
           onDrillDown={this.handleDrillDown}
           onSelectEvent={this.handleSelectEvent}
           onDoubleClickEvent={this.handleDoubleClickEvent}
+          onHoverEvent={this.handleHoverEvent}
           onSelectSlot={this.handleSelectSlot}
           onShowMore={onShowMore}
         />
@@ -976,6 +987,10 @@ class Calendar extends React.Component {
 
   handleDoubleClickEvent = (...args) => {
     notify(this.props.onDoubleClickEvent, args)
+  }
+
+  handleHoverEvent = (...args) => {
+    notify(this.props.onHoverEvent, args)
   }
 
   handleSelectSlot = slotInfo => {

@@ -131,6 +131,7 @@ class MonthView extends React.Component {
         onShowMore={this.handleShowMore}
         onSelect={this.handleSelectEvent}
         onDoubleClick={this.handleDoubleClickEvent}
+        onHover={this.handleHoverEvent}
         onSelectSlot={this.handleSelectSlot}
         longPressThreshold={longPressThreshold}
         rtl={this.props.rtl}
@@ -208,6 +209,7 @@ class MonthView extends React.Component {
           slotEnd={overlay.end}
           onSelect={this.handleSelectEvent}
           onDoubleClick={this.handleDoubleClickEvent}
+          onHover={this.handleHoverEvent}
         />
       </Overlay>
     )
@@ -243,6 +245,10 @@ class MonthView extends React.Component {
     notify(this.props.onDoubleClickEvent, args)
   }
 
+  handleHoverEvent = (...args) => {
+    notify(this.props.onHoverEvent, args)
+  }
+
   handleShowMore = (events, date, cell, slot) => {
     const { popup, onDrillDown, onShowMore, getDrilldownView } = this.props
     //cancel any pending selections so only the event click goes through.
@@ -274,7 +280,7 @@ class MonthView extends React.Component {
       end: slots[slots.length - 1],
       action: slotInfo.action,
       bounds: slotInfo.bounds,
-      box: slotInfo.box
+      box: slotInfo.box,
     })
   }
 
@@ -311,6 +317,7 @@ MonthView.propTypes = {
   onSelectSlot: PropTypes.func,
   onSelectEvent: PropTypes.func,
   onDoubleClickEvent: PropTypes.func,
+  onHoverEvent: PropTypes.func,
   onShowMore: PropTypes.func,
   onDrillDown: PropTypes.func,
   getDrilldownView: PropTypes.func.isRequired,

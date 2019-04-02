@@ -18,6 +18,7 @@ export default {
 
     onSelect: PropTypes.func,
     onDoubleClick: PropTypes.func,
+    onHover: PropTypes.func,
   },
 
   defaultProps: {
@@ -33,6 +34,7 @@ export default {
       getters,
       onSelect,
       onDoubleClick,
+      onHover,
       localizer,
       slotMetrics,
       components,
@@ -50,6 +52,7 @@ export default {
         components={components}
         onSelect={onSelect}
         onDoubleClick={onDoubleClick}
+        onHover={onHover}
         continuesPrior={continuesPrior}
         continuesAfter={continuesAfter}
         selected={isSelected(event, selected)}
@@ -58,7 +61,7 @@ export default {
   },
 
   renderSpan(slots, len, key, content = ' ') {
-    let per = Math.abs(len) / slots * 100 + '%'
+    let per = (Math.abs(len) / slots) * 100 + '%'
 
     return (
       <div
