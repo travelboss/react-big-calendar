@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import memoize from 'memoize-one'
 
-import dates from './utils/dates'
+import * as dates from './utils/dates'
 import DayColumn from './DayColumn'
 import TimeGutter from './TimeGutter'
 
@@ -22,6 +22,7 @@ export default class TimeGrid extends Component {
     this.state = { gutterWidth: undefined, isOverflowing: null }
 
     this.scrollRef = React.createRef()
+    this.contentRef = React.createRef()
   }
 
   componentWillMount() {
@@ -141,6 +142,7 @@ export default class TimeGrid extends Component {
       events,
       range,
       width,
+      rtl,
       selected,
       getNow,
       resources,
@@ -191,6 +193,7 @@ export default class TimeGrid extends Component {
           range={range}
           events={allDayEvents}
           width={width}
+          rtl={rtl}
           getNow={getNow}
           localizer={localizer}
           selected={selected}
@@ -210,7 +213,7 @@ export default class TimeGrid extends Component {
           getDrilldownView={this.props.getDrilldownView}
         />
         <div
-          ref="content"
+          ref={this.contentRef}
           className="rbc-time-content"
           onScroll={this.handleScroll}
         >
@@ -254,7 +257,7 @@ export default class TimeGrid extends Component {
 
   applyScroll() {
     if (this._scrollRatio) {
-      const { content } = this.refs
+      const content = this.contentRef.current
       content.scrollTop = content.scrollHeight * this._scrollRatio
       // Only do this once
       this._scrollRatio = null
@@ -273,8 +276,8 @@ export default class TimeGrid extends Component {
   checkOverflow = () => {
     if (this._updatingOverflow) return
 
-    let isOverflowing =
-      this.refs.content.scrollHeight > this.refs.content.clientHeight
+    const content = this.contentRef.current
+    let isOverflowing = content.scrollHeight > content.clientHeight
 
     if (this.state.isOverflowing !== isOverflowing) {
       this._updatingOverflow = true
